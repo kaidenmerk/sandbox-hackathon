@@ -8,11 +8,14 @@ public class movement : MonoBehaviour
     public bool right = false;
     public bool started = false;
     public Rigidbody2D body;
-    public SpriteRenderer renderer;
+    public SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
-        
+       if (transform.position.x < 0)
+        {
+            right = true;
+        }
     }
 
     // Update is called once per frame
@@ -20,12 +23,28 @@ public class movement : MonoBehaviour
     {
         if (started)
         {
+            // Add logic for despawn
+            if (right)
+            {
+                if (transform.position.x >= 12)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                if (transform.position.x <= -12)
+                {
+                    Destroy(gameObject);
+                }
+            }
             return;
         }
         speed = Random.Range(3, 6);
+
         if (!right)
         {
-            renderer.flipX = true;
+            spriteRenderer.flipX = true;
             body.velocity = Vector2.left * speed;
 
         }

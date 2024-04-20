@@ -49,9 +49,9 @@ public class GameManager : MonoBehaviour
         
         // Get all players
         playerJoins = new PlayerJoin[0];
-        
-        // When first player joins call start scene
 
+        // When first player joins call start scene
+        RestartGame();
         
 
     }

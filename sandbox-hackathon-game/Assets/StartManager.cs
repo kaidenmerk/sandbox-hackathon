@@ -10,6 +10,7 @@ public class StartManager : MonoBehaviour
 
     void Start()
     {
+ 
         waitingForHostText.gameObject.SetActive(true);
         waitingForHostText.text = "Waiting for host to start the game...";
         countdownDisplay.gameObject.SetActive(false);

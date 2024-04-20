@@ -68,6 +68,11 @@ public class spriteSpawnerScript : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public int getCount()
+    {
+        return spawnCount;
+    }
+
     // spawns character given index and orientation
     void spawn(int index)
     {

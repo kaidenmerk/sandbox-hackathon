@@ -73,10 +73,12 @@ public class GameManager : MonoBehaviour
         // TODO: Any of the following code may be modified or deleted
         if (Input.GetKeyDown(KeyCode.J))
         {
+            Debug.Log("Pressed J");
             PlayerJoin playerJoin = new PlayerJoin();
             playerJoin.name = "Player " + playerJoins.Length;
             playerJoin.stats = new GameStats();
             string jsonPlayerJoin = JsonUtility.ToJson(playerJoin);
+            Debug.Log(jsonPlayerJoin);
             PlayerJoined(jsonPlayerJoin);
         }
 
@@ -118,8 +120,13 @@ public class GameManager : MonoBehaviour
             controllerState.circle = false;
             controllerState.triangle = false;
             controllerState.plus = false;
+            if (Input.GetKey(KeyCode.P))
+            {
+                controllerState.plus = true;
+            }
             string jsonControllerState = JsonUtility.ToJson(controllerState);
             PlayerControllerState(jsonControllerState);
+            Debug.Log(jsonControllerState);
         }
 
         // Test HandleExit

@@ -20,6 +20,7 @@ public class movement : MonoBehaviour
     {
         if (started)
         {
+            // Add logic for despawn
             return;
         }
         speed = Random.Range(3, 6);

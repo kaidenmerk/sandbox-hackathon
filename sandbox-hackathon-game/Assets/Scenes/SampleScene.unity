@@ -342,66 +342,9 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1694276495
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1694276496}
-  - component: {fileID: 1694276497}
-  m_Layer: 0
-  m_Name: SpriteSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1694276496
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1694276495}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8339623, y: 1.9917113, z: 0.049875434}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1694276497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1694276495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75973ccd587e2f74993d45b46b2fba8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  backpack: {fileID: 6018818083676415973, guid: dbe13358229254ab09d6b8246b820eab, type: 3}
-  guy: {fileID: 7738744479129330933, guid: 5cfc685eb2a614501bcfc871cdaec85c, type: 3}
-  guitar: {fileID: 6401512055476889637, guid: 381beb029333046b2b535c21cafee1e2, type: 3}
-  greenHair: {fileID: 7926937032186340984, guid: bf9e86bdf4e154cf39c87b8d64de8f0d, type: 3}
-  headphones: {fileID: 6095319128021948039, guid: df40be4788042a14485d6c6d46c2774b, type: 3}
-  horns: {fileID: 629399540933673846, guid: 9da9575f5f6c2412b813a1c4032c1f9c, type: 3}
-  monk: {fileID: 7285233924437830932, guid: e78fc26121a314eb38093fc7755590b9, type: 3}
-  roller: {fileID: 0}
-  sprites: []
-  timer: 0
-  spawnrate: 6
-  spawnCount: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 1694276496}

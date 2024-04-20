@@ -16,6 +16,7 @@ public class spriteSpawnerScript : MonoBehaviour
     public float timer = 0;
     public float spawnrate = 6;
     public int spawnCount = 0;
+    public float[,] locations;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,34 @@ public class spriteSpawnerScript : MonoBehaviour
         sprites[4] = headphones;
         sprites[5] = horns;
         sprites[6] = monk;
+        // Define Locations -12/12 , (1.8, 0, -2), 0
+
+        //Define X
+        locations = new float[6, 3];
+        locations[0, 0] = -12;
+        locations[1, 0] = -12;
+        locations[2, 0] = -12;
+        locations[3, 0] = 12;
+        locations[4, 0] = 12;
+        locations[5, 0] = 12;
+
+        // Define Y
+        locations = new float[6, 3];
+        locations[0, 1] = 1.8F;
+        locations[1, 1] = 0;
+        locations[2, 1] = -2;
+        locations[3, 1] = 1.8F;
+        locations[4, 1] = 0;
+        locations[5, 1] = -2;
+        //Define Z
+        locations = new float[6, 3];
+        locations[0, 2] = 0;
+        locations[1, 2] = 0;
+        locations[2, 2] = 0;
+        locations[3, 2] = 0;
+        locations[4, 2] = 0;
+        locations[5, 2] = 0;
+
     }
 
     // Update is called once per frame
@@ -39,12 +68,13 @@ public class spriteSpawnerScript : MonoBehaviour
             timer += Time.deltaTime;
         }
         // Else, spawn in a character, reset timer to 0. Change spawncount % from 7 to 8 if roller works
-        else {
+        else
+        {
             spawn(spawnCount % 7);
             timer = 0;
             spawnCount++;
         }
-        
+
     }
 
     // spawns character given index and orientation
@@ -53,16 +83,20 @@ public class spriteSpawnerScript : MonoBehaviour
         GameObject sprite = sprites[index];
         bool orientation = Random.Range(0, 100) >= 50;
 
-        if(orientation)
+        if (orientation)
         {
             //Change transformation.position to coordinates right outside left of screen
-            Instantiate(sprite, transform.position, transform.rotation);
-
+            GameObject s = Instantiate(sprite, new Vector3(locations[index % 3, 0], locations[index % 3, 1], 0), transform.rotation);
         }
 
-        else {
+        else
+        {
             //Change transformation.position to coordinates right outside right of screen
-            Instantiate(sprite, transform.position, transform.rotation);
+            GameObject s = Instantiate(sprite, new Vector3(locations[index % 3 + 3, 0], locations[index % 3, 1] + 3, 0), transform.rotation);
+
         }
     }
+
+    //Create function that takes integer i that represents the lane to spawn in a sprite, size accordingly
+    
 }

@@ -44,10 +44,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        
+        // Get all players
         playerJoins = new PlayerJoin[0];
- 
-    }
+        
+        // When first player joins call start scene
 
+        
+
+    }
+    
     void Update()
     {
         //// Testing Madder functions

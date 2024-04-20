@@ -1,31 +1,29 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 using System.Collections;
 
 public class StartManager : MonoBehaviour
 {
     public TextMeshProUGUI countdownDisplay;
-    public Button startButton;
     public TextMeshProUGUI roomCodeDisplay; // This UI element displays the room code
+    public TextMeshProUGUI waitingForHostText; // Text to display while waiting for the host
 
-    void Awake()
+    void Start()
     {
-        startButton.onClick.AddListener(HandleStartButtonClick);
-        startButton.gameObject.SetActive(false);  // Start with the button hidden
-        countdownDisplay.gameObject.SetActive(false);  // Ensure the countdown is hidden initially
-        roomCodeDisplay.text = "Room Code: "; // Initial text setting
+        waitingForHostText.gameObject.SetActive(true);
+        waitingForHostText.text = "Waiting for host to start the game...";
+        countdownDisplay.gameObject.SetActive(false);
+        roomCodeDisplay.gameObject.SetActive(true);
     }
 
     public void UpdateRoomCode(string roomCode)
     {
-        roomCodeDisplay.text = "Room Code: " + roomCode;  // Update display when called
-        startButton.gameObject.SetActive(true);  // Show the button once room code is set
+        roomCodeDisplay.text = "Room Code: " + roomCode;
     }
 
-    private void HandleStartButtonClick()
+    public void StartGameCountdown()
     {
-        startButton.gameObject.SetActive(false); // Hide the button
+        waitingForHostText.gameObject.SetActive(false);
         StartCoroutine(CountdownToStart());
     }
 

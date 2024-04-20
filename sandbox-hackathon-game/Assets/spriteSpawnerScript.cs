@@ -18,7 +18,7 @@ public class spriteSpawnerScript : MonoBehaviour
     public int spawnCount = 0;
     public Vector3[] locations;
     public bool spawnIn = true;
-    System.Random rand = new();
+    System.Random rand = new System.Random();
     
     // Start is called before the first frame update
     void Start()
@@ -47,29 +47,31 @@ public class spriteSpawnerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //If timer < spawnrate, add delta time to timer
-        if (timer < spawnrate)
+        while (spawnIn)
         {
-            timer += Time.deltaTime;
-        }
-        // Set spawnIn to false in GameManager when game period ends
-        else
-        {
-            if (spawnIn)
+            //If timer < spawnrate, add delta time to timer
+            if (timer < spawnrate)
+            {
+                timer += Time.deltaTime;
+            }
+            // Set spawnIn to false in GameManager when game period ends
+            else
             {
                 spawn(spawnCount % 7);
                 timer = 0;
                 spawnCount++;
-                spawnrate = (float) rand.NextDouble();
+                spawnrate = (float)rand.NextDouble();
             }
         }
-
     }
 
     // spawns character given index and orientation
     void spawn(int index)
     {
+        if (!spawnIn)
+        {
+            return;
+        }
         // Selects what sprite to use
         GameObject sprite = sprites[index];
         // Chooses where to spawn

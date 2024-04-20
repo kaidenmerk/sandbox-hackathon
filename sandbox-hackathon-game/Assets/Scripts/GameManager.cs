@@ -24,8 +24,9 @@ public class GameManager : MonoBehaviour
     private static extern void UpdateStats(string userName, string stats);
 
 
-    public StartManager startManager; // Reference to the StartManager component
     public static GameManager Instance { get; private set; }
+    public StartManager startManager;
+    private string hostPlayerName = "";
 
     private void Awake()
     {
@@ -49,75 +50,75 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // Testing Madder functions
-        // TODO: This code should be commented out or removed before submission
+        //// Testing Madder functions
+        //// TODO: This code should be commented out or removed before submission
 
-        // Test RoomCode
-        // TODO: Any of the following code may be modified or deleted
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RoomCode("ABCD");
-        }
+        //// Test RoomCode
+        //// TODO: Any of the following code may be modified or deleted
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    RoomCode("ABCD");
+        //}
 
-        // Test PlayerJoined
-        // TODO: Any of the following code may be modified or deleted
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            PlayerJoin playerJoin = new PlayerJoin();
-            playerJoin.name = "Player " + playerJoins.Length;
-            playerJoin.stats = new GameStats();
-            string jsonPlayerJoin = JsonUtility.ToJson(playerJoin);
-            PlayerJoined(jsonPlayerJoin);
-        }
+        //// Test PlayerJoined
+        //// TODO: Any of the following code may be modified or deleted
+        //if (Input.GetKeyDown(KeyCode.J))
+        //{
+        //    PlayerJoin playerJoin = new PlayerJoin();
+        //    playerJoin.name = "Player " + playerJoins.Length;
+        //    playerJoin.stats = new GameStats();
+        //    string jsonPlayerJoin = JsonUtility.ToJson(playerJoin);
+        //    PlayerJoined(jsonPlayerJoin);
+        //}
 
-        // Test PlayerLeft
-        // TODO: Any of the following code may be modified or deleted
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            if (playerJoins.Length == 0)
-            {
-                return;
-            }
-            PlayerLeft("Player 0");
-        }
+        //// Test PlayerLeft
+        //// TODO: Any of the following code may be modified or deleted
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    if (playerJoins.Length == 0)
+        //    {
+        //        return;
+        //    }
+        //    PlayerLeft("Player 0");
+        //}
 
-        // Test PlayerControllerState for Player 0
-        // TODO: Any of the following code may be modified or deleted
-        if (playerJoins.Length > 0)
-        {
-            Joystick joystick = new Joystick(0, 0);
-            if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
-            {
-                joystick.y = 100;
-            }
-            if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
-            {
-                joystick.y = -100;
-            }
-            if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
-            {
-                joystick.x = -100;
-            }
-            if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
-            {
-                joystick.x = 100;
-            }
-            ControllerState controllerState = new ControllerState();
-            controllerState.name = playerJoins[0].name;
-            controllerState.joystick = joystick;
-            controllerState.circle = false;
-            controllerState.triangle = false;
-            controllerState.plus = false;
-            string jsonControllerState = JsonUtility.ToJson(controllerState);
-            PlayerControllerState(jsonControllerState);
-        }
+        //// Test PlayerControllerState for Player 0
+        //// TODO: Any of the following code may be modified or deleted
+        //if (playerJoins.Length > 0)
+        //{
+        //    Joystick joystick = new Joystick(0, 0);
+        //    if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
+        //    {
+        //        joystick.y = 100;
+        //    }
+        //    if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
+        //    {
+        //        joystick.y = -100;
+        //    }
+        //    if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        //    {
+        //        joystick.x = -100;
+        //    }
+        //    if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+        //    {
+        //        joystick.x = 100;
+        //    }
+        //    ControllerState controllerState = new ControllerState();
+        //    controllerState.name = playerJoins[0].name;
+        //    controllerState.joystick = joystick;
+        //    controllerState.circle = false;
+        //    controllerState.triangle = false;
+        //    controllerState.plus = false;
+        //    string jsonControllerState = JsonUtility.ToJson(controllerState);
+        //    PlayerControllerState(jsonControllerState);
+        //}
 
-        // Test HandleExit
-        // TODO: Any of the following code may be modified or deleted
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            HandleExit();
-        }
+        //// Test HandleExit
+        //// TODO: Any of the following code may be modified or deleted
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    HandleExit();
+        //}
     }
 
     public void StartGame()
@@ -185,10 +186,6 @@ public class GameManager : MonoBehaviour
             playerJoin.stats.gamesPlayed = new Stat("Games Played", 0);
         }
 
-        // Create player name on canvas
-        GameObject name = Instantiate(nameObject, canvas.transform);
-        name.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-        name.GetComponent<NameScript>().SetName(playerJoin.name);
         
         // Add player to playerJoins array
         PlayerJoin[] newPlayerJoins = new PlayerJoin[playerJoins.Length + 1];
@@ -198,6 +195,11 @@ public class GameManager : MonoBehaviour
         }
         newPlayerJoins[playerJoins.Length] = playerJoin;
         playerJoins = newPlayerJoins;
+
+        if (playerJoins.Length == 1)
+        {
+            hostPlayerName = playerJoin.name;
+        }
 
         // Add game played to player stats
         playerJoin.stats.addGamePlayed();
@@ -264,12 +266,16 @@ public class GameManager : MonoBehaviour
         ControllerState controllerState = JsonUtility.FromJson<ControllerState>(jsonControllerState);
         // TODO: Any of the following code may be modified or deleted
 
-        // Move player based on joystick
-        foreach (Transform child in canvas.transform)
+        if (SceneManager.GetActiveScene().name == "StartScene")
         {
-            if (child.GetComponent<NameScript>().GetName() == controllerState.name)
+            // Check if the host has pressed the triangle button
+            if (controllerState.name == hostPlayerName && controllerState.triangle)
             {
-                child.GetComponent<NameScript>().UpdateXY(controllerState.joystick.x, controllerState.joystick.y);
+                // Start the game if we're in the Start Scene and the host presses triangle
+                if (startManager != null)
+                {
+                    startManager.StartGameCountdown();
+                }
             }
         }
     }

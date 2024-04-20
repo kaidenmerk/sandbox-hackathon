@@ -8,11 +8,11 @@ public class movement : MonoBehaviour
     public bool right = false;
     public bool started = false;
     public Rigidbody2D body;
-    public SpriteRenderer renderer;
+    public SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        // set right to true or false based on starting x position
     }
 
     // Update is called once per frame
@@ -23,9 +23,10 @@ public class movement : MonoBehaviour
             return;
         }
         speed = Random.Range(3, 6);
+
         if (!right)
         {
-            renderer.flipX = true;
+            spriteRenderer.flipX = true;
             body.velocity = Vector2.left * speed;
 
         }

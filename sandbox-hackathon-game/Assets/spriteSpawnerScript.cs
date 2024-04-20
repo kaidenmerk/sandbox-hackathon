@@ -15,9 +15,11 @@ public class spriteSpawnerScript : MonoBehaviour
     public GameObject[] sprites;
     public float timer = 0;
     public float spawnrate = 6;
+    public int spawnCount = 0;
     // Start is called before the first frame update
     void Start()
     {
+        sprites = new GameObject[7];
         sprites[0] = backpack;
         sprites[1] = guy;
         sprites[2] = guitar;
@@ -25,7 +27,6 @@ public class spriteSpawnerScript : MonoBehaviour
         sprites[4] = headphones;
         sprites[5] = horns;
         sprites[6] = monk;
-        sprites[7] = roller;
     }
 
     // Update is called once per frame
@@ -33,8 +34,35 @@ public class spriteSpawnerScript : MonoBehaviour
     {
 
         //If timer < spawnrate, add delta time to timer
-
-        // Else, spawn in a random character, reset timer to 0
+        if (timer < spawnrate)
+        {
+            timer += Time.deltaTime;
+        }
+        // Else, spawn in a character, reset timer to 0. Change spawncount % from 7 to 8 if roller works
+        else {
+            spawn(spawnCount % 7);
+            timer = 0;
+            spawnCount++;
+        }
         
+    }
+
+    // spawns character given index and orientation
+    void spawn(int index)
+    {
+        GameObject sprite = sprites[index];
+        bool orientation = Random.Range(0, 100) >= 50;
+
+        if(orientation)
+        {
+            //Change transformation.position to coordinates right outside left of screen
+            Instantiate(sprite, transform.position, transform.rotation);
+
+        }
+
+        else {
+            //Change transformation.position to coordinates right outside right of screen
+            Instantiate(sprite, transform.position, transform.rotation);
+        }
     }
 }

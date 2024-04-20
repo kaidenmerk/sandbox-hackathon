@@ -65,7 +65,6 @@ public class spriteSpawnerScript : MonoBehaviour
                 timer2 += Time.deltaTime;
             }
         }
-        Destroy(gameObject);
     }
 
     public int getCount()

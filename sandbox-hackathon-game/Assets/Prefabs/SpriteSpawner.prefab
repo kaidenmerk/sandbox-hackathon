@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3533870374002785888}
   m_Layer: 0
   m_Name: SpriteSpawner
-  m_TagString: Untagged
+  m_TagString: spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,5 +54,7 @@ MonoBehaviour:
   roller: {fileID: 0}
   sprites: []
   timer: 0
-  spawnrate: 6
+  timer2: 0
+  spawnrate: 0.5
   spawnCount: 0
+  locations: []

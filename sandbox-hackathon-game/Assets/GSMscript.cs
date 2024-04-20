@@ -5,17 +5,27 @@ using UnityEngine.UI;
 public class GSMscript : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject spawner;
+    public spriteSpawnerScript spawner;
+    float timer = 0;
+    public int spawned;
     void Start()
     {
-        Instantiate(spawner, transform.position, transform.rotation);
+        spawner = GameObject.FindGameObjectWithTag("spawner").GetComponent<spriteSpawnerScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-     
+     while (timer < 20)
+        {
+            timer += Time.deltaTime;
+        }
+        spawned = spawner.spawnCount;
     }
 
+    int getSpawned()
+    {
+        return spawned;
+    }
 
 }

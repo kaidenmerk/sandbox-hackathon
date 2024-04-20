@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class spriteSpawnerScript : MonoBehaviour
 {
     public GameObject backpack;
@@ -14,9 +14,12 @@ public class spriteSpawnerScript : MonoBehaviour
     public GameObject roller;
     public GameObject[] sprites;
     public float timer = 0;
-    public float spawnrate = 2;
+    public float spawnrate = 0.5F;
     public int spawnCount = 0;
     public Vector3[] locations;
+    public bool spawnIn = true;
+    System.Random rand = new();
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -50,13 +53,16 @@ public class spriteSpawnerScript : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-        // Else, spawn in a character, reset timer to 0. Change spawncount % from 7 to 8 if roller works
+        // Set spawnIn to false in GameManager when game period ends
         else
         {
-            spawn(spawnCount % 7);
-            timer = 0;
-            spawnCount++;
-            spawnrate = Random.Range(0, 3);
+            if (spawnIn)
+            {
+                spawn(spawnCount % 7);
+                timer = 0;
+                spawnCount++;
+                spawnrate = (float) rand.NextDouble();
+            }
         }
 
     }
@@ -67,17 +73,17 @@ public class spriteSpawnerScript : MonoBehaviour
         // Selects what sprite to use
         GameObject sprite = sprites[index];
         // Chooses where to spawn
-        bool orientation = Random.Range(0, 100) >= 50;
+        int orientation = UnityEngine.Random.Range(0, 100);
 
-        if (orientation)
+        if (orientation >= 50)
         {
             // Change transformation.position to coordinates right outside left of screen
-            GameObject s = Instantiate(sprite, locations[index % 3], transform.rotation);
+            GameObject s = Instantiate(sprite, locations[orientation % 3], transform.rotation);
         }
         else
         {
             // Change transformation.position to coordinates right outside right of screen
-            GameObject s = Instantiate(sprite, locations[(index % 3)+ 3], transform.rotation);
+            GameObject s = Instantiate(sprite, locations[(orientation % 3)+ 3], transform.rotation);
         }
     }
 

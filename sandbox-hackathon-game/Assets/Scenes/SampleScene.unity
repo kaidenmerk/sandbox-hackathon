@@ -342,6 +342,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1418461191
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,11 +430,16 @@ MonoBehaviour:
   timer: 0
   spawnrate: 6
   spawnCount: 0
+=======
+>>>>>>> cecc96ff9e711078512f3d225688a95cfe725d8e
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
+<<<<<<< HEAD
   - {fileID: 1694276496}
   - {fileID: 1418461192}
+=======
+>>>>>>> cecc96ff9e711078512f3d225688a95cfe725d8e

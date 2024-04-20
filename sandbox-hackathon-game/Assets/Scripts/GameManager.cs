@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public Canvas canvas;
     public GameObject nameObject;
     private PlayerJoin[] playerJoins;
+
 
     // Madder functions that you may call
     // These functions should be conditionally called based on if this is inside a WebGL build, not the editor
@@ -20,9 +23,28 @@ public class GameManager : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void UpdateStats(string userName, string stats);
 
+
+    public StartManager startManager; // Reference to the StartManager component
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);  // This makes the GameManager persist across scene loads
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);  // Ensures only one instance of the GameManager exists
+        }
+    }
+
+
     void Start()
     {
         playerJoins = new PlayerJoin[0];
+ 
     }
 
     void Update()
@@ -98,6 +120,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void StartGame()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void EndGame()
+    {
+        SceneManager.LoadScene("ScoreScene");
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
+
     // TODO: The following function may be modified or deleted
     void HandleExit()
     {
@@ -118,8 +155,10 @@ public class GameManager : MonoBehaviour
     */
     public void RoomCode(string roomCode) 
     {
-        // TODO: Any of the following code may be modified or deleted
-        Debug.Log("Room Code: " + roomCode);
+        if (startManager != null)
+        {
+            startManager.UpdateRoomCode(roomCode);
+        }
     }
 
     /*

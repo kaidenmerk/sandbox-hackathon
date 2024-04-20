@@ -123,6 +123,8 @@ public class GameManager : MonoBehaviour
             if (Input.GetKey(KeyCode.P))
             {
                 controllerState.plus = true;
+                Debug.Log(playerJoins[0].name);
+                Debug.Log(playerJoins[0].stats);
             }
             string jsonControllerState = JsonUtility.ToJson(controllerState);
             PlayerControllerState(jsonControllerState);

@@ -392,8 +392,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1416999c7fd67e459b362882c3bb222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   spawner: {fileID: 3533870374002785888, guid: ee0a3c9c36977a444951b2724f63d4d1, type: 3}
   spawned: 0
+=======
+<<<<<<< HEAD
+=======
+  timer: 0
+  stop: 10
+  spawner: {fileID: 6602334077119352261, guid: ee0a3c9c36977a444951b2724f63d4d1, type: 3}
+>>>>>>> 10e0dc2d6d14c7254b4e23505ec8e72a6303e3c6
+>>>>>>> b9e2473d0e7c9556ce56eff1bb087a5f6c4a77b2
 --- !u!4 &1023482571
 Transform:
   m_ObjectHideFlags: 0

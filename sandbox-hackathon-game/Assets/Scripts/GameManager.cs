@@ -295,6 +295,19 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        else if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            if (controllerState.plus)
+            {
+                for (int i = 0; i < playerJoins.Length; i++)
+                {
+                    if (playerJoins[i].name == controllerState.name)
+                    {
+                        playerJoins[i].stats.score.value++;
+                    }
+                }
+            }
+        }
     }
 
     /*
@@ -325,6 +338,11 @@ public class GameManager : MonoBehaviour
             title = initTitle;
             value = initValue;
         }
+
+        public void addVal()
+        {
+            value++;
+        }
     }
     // TODO: Add any additional children classes of Stat here
 
@@ -338,11 +356,17 @@ public class GameManager : MonoBehaviour
     public class GameStats {
         // TODO: Add/Remove any fields of type Stat or a child class of Stat here
         public Stat gamesPlayed;
+        public Stat score;
         public GameStats() {
             gamesPlayed = new Stat("Games Played", 0);
+            score = new Stat("Score", 0);
         }
         public void addGamePlayed() {
             gamesPlayed.value++;
+        }
+        public void addScore()
+        {
+            score.value++;
         }
     }
 

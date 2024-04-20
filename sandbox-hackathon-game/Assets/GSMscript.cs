@@ -5,8 +5,6 @@ using UnityEngine.UI;
 public class GSMscript : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float timer = 0;
-    public float stop = 15;
     public GameObject spawner;
     void Start()
     {
@@ -17,7 +15,6 @@ public class GSMscript : MonoBehaviour
     void Update()
     {
      
-        timer += Time.deltaTime;
     }
 
 

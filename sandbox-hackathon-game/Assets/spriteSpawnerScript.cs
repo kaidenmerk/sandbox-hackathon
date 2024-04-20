@@ -47,7 +47,7 @@ public class spriteSpawnerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        while (timer2 < 10)
+        while (timer2 < 20)
         {
             //If timer < spawnrate, add delta time to timer
             if (timer < spawnrate)
@@ -61,11 +61,11 @@ public class spriteSpawnerScript : MonoBehaviour
                 spawn(spawnCount % 7);
                 timer = 0;
                 spawnCount++;
-                spawnrate = (float)rand.NextDouble();
+                spawnrate = (float)rand.NextDouble() + 0.25F;
                 timer2 += Time.deltaTime;
             }
         }
-
+        Destroy(gameObject);
     }
 
     // spawns character given index and orientation

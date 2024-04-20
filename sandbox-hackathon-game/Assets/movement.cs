@@ -12,7 +12,10 @@ public class movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // set right to true or false based on starting x position
+       if (transform.position.x < 0)
+        {
+            right = true;
+        }
     }
 
     // Update is called once per frame
@@ -21,6 +24,20 @@ public class movement : MonoBehaviour
         if (started)
         {
             // Add logic for despawn
+            if (right)
+            {
+                if (transform.position.x >= 12)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                if (transform.position.x <= -12)
+                {
+                    Destroy(gameObject);
+                }
+            }
             return;
         }
         speed = Random.Range(3, 6);

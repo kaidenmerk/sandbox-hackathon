@@ -6,24 +6,17 @@ public class GSMscript : MonoBehaviour
 {
     // Start is called before the first frame update
     public float timer = 0;
-    public float stop = 10;
-    textFadeScript fs;
-    spriteSpawnerScript spawner;
+    public float stop = 15;
+    public GameObject spawner;
     void Start()
     {
-        fs = GetComponent<textFadeScript>();
-        spawner = GetComponent<spriteSpawnerScript>();
+        Instantiate(spawner, transform.position, transform.rotation);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timer > stop)
-        {
-            spawner.spawnIn = false;
-            fs.textComponent.text = "Round Over!";
-            fs.FadeInText();
-        }
+     
         timer += Time.deltaTime;
     }
 

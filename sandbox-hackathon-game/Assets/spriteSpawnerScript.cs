@@ -14,10 +14,10 @@ public class spriteSpawnerScript : MonoBehaviour
     public GameObject roller;
     public GameObject[] sprites;
     public float timer = 0;
+    public float timer2 = 0;
     public float spawnrate = 0.5F;
     public int spawnCount = 0;
     public Vector3[] locations;
-    public bool spawnIn = true;
     System.Random rand = new System.Random();
     
     // Start is called before the first frame update
@@ -47,12 +47,13 @@ public class spriteSpawnerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        while (spawnIn)
+        while (timer2 < 10)
         {
             //If timer < spawnrate, add delta time to timer
             if (timer < spawnrate)
             {
                 timer += Time.deltaTime;
+                timer2 += Time.deltaTime;
             }
             // Set spawnIn to false in GameManager when game period ends
             else
@@ -61,17 +62,15 @@ public class spriteSpawnerScript : MonoBehaviour
                 timer = 0;
                 spawnCount++;
                 spawnrate = (float)rand.NextDouble();
+                timer2 += Time.deltaTime;
             }
         }
+
     }
 
     // spawns character given index and orientation
     void spawn(int index)
     {
-        if (!spawnIn)
-        {
-            return;
-        }
         // Selects what sprite to use
         GameObject sprite = sprites[index];
         // Chooses where to spawn
@@ -80,12 +79,12 @@ public class spriteSpawnerScript : MonoBehaviour
         if (orientation >= 50)
         {
             // Change transformation.position to coordinates right outside left of screen
-            GameObject s = Instantiate(sprite, locations[orientation % 3], transform.rotation);
+            Instantiate(sprite, locations[orientation % 3], transform.rotation);
         }
         else
         {
             // Change transformation.position to coordinates right outside right of screen
-            GameObject s = Instantiate(sprite, locations[(orientation % 3)+ 3], transform.rotation);
+            Instantiate(sprite, locations[(orientation % 3)+ 3], transform.rotation);
         }
     }
 

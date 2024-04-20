@@ -40,7 +40,7 @@ public class movement : MonoBehaviour
             }
             return;
         }
-        speed = Random.Range(3, 6);
+        speed = Random.Range(2, 9);
 
         if (!right)
         {

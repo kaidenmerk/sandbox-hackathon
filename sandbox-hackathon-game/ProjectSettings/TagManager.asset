@@ -7,6 +7,7 @@ TagManager:
   - Score
   - Undefined
   - spawner
+  - GameSceneManager
   layers:
   - Default
   - TransparentFX

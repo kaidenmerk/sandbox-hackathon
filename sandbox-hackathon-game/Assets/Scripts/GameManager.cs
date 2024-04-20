@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     }
     
-    void Update()
+    /*void Update()
     {
         // Testing Madder functions
         // TODO: This code should be commented out or removed before submission
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
         {
             HandleExit();
         }
-    }
+    }*/
 
     public void StartGame()
     {
